@@ -1,0 +1,12 @@
+FROM ghcr.io/k8sli/fedora-base:34 as os-fedora34
+
+COPY packages.yaml .
+RUN yq eval '.common[],.yum[],.fedora[],.fedora34[],.kubespray.common[],.kubespray.yum[]' packages.yaml > packages.list
+
+RUN ARCH=$(uname -m) \
+    && sort -u packages.list | xargs repotrack --destdir ${ARCH} \
+    && createrepo -d ${ARCH}
+
+FROM scratch
+COPY --from=os-fedora34 /fedora /resources/nginx/fedora
+COPY repos/Fedora-All-in-One.repo /resources/nginx/repos/Fedora-34-All-in-One.repo
