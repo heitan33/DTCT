@@ -1,0 +1,24 @@
+---
+common:
+  - anacron
+  - chrony
+  - curl
+  - gnome-control-center
+  - keepalived
+  - lsof
+  - less
+  - mysql-server
+  - net-tools
+  - netcat
+  - netplan.io
+  - openssh-server
+  - rabbitmq-server
+  - rsync
+  - snmpd
+  - socat
+  - supervisor
+  - vim
+  - ufw
+  - unzip
+  - wget
+  - sqlite3
